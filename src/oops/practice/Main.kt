@@ -228,21 +228,70 @@ class Scooter() : Vehicle() {
         println("Scooter engine stopped!")
         setSpeed(0)
     }
+}
 
+/* 6. Interface
+* In kotlin, Interfaces are similar to abstract classes but can be implemented
+* by classes that already extend another class.
+*/
 
+open class Recorder {
+    fun startRecorder() {
+        println("Recorder started")
+    }
+
+    fun stopRecorder() {
+        println("Recorder stopped")
+    }
+}
+
+interface VolumeController {
+    fun increase()
+    fun decrease()
+}
+
+interface MediaController {
+    fun play()
+    fun pause()
+    fun stop()
+}
+
+class MediaPlayer() : Recorder(), MediaController,  VolumeController {
+    override fun play() {
+        println("Playing media")
+    }
+
+    override fun pause() {
+        println("Media paused")
+    }
+
+    override fun stop() {
+        println("Media stopped")
+    }
+
+    override fun increase() {
+        println("Volume up")
+    }
+
+    override fun decrease() {
+        println("Volume down")
+    }
 }
 
 // main entry point of execution
 fun main() {
-//    // Creating objects
+//    Classes & Objects
+//    Creating objects
 //    val laptop = Product(1, "HP", 50000.0, true)
 //    laptop.applyDiscount(20.0) // calling the object's method
 
+//    Encapsulation
 //    val obj = BankAccount()
 //    obj.showBalance()
 //    obj.creditBalance(15000.0)
 //    obj.debitBalance(10000.0)
 
+//    Polymorphism
 //    val emailNotification = EmailNotification("Hello Android!", "Brijesh")
 //    emailNotification.sendMessage()
 //    emailNotification.greet()
@@ -257,7 +306,18 @@ fun main() {
 //    val googlePay = GooglePay()
 //    checkout(500.0, googlePay)
 
-    val dio = Scooter()
-    dio.setSpeed(40)
-    dio.stop()
+//    Abstraction
+//    val dio = Scooter()
+//    dio.setSpeed(40)
+//    dio.stop()
+
+//    Interfaces
+//    val myMediaPlayer = MediaPlayer()
+//    myMediaPlayer.play()
+//    myMediaPlayer.increase()
+//    myMediaPlayer.startRecorder()
+//    myMediaPlayer.pause()
+//    myMediaPlayer.decrease()
+//    myMediaPlayer.stopRecorder()
+//    myMediaPlayer.stop()
 }
