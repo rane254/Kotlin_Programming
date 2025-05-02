@@ -187,6 +187,51 @@ fun checkout(amount: Double, paymentMethod: PaymentMethod) {
     }
 }
 
+/*
+* 5. Abstraction.
+* Abstraction allows you to hide complex implementation details and
+* show only the necessary features.
+*/
+
+abstract class Vehicle {
+    abstract val maxSpeed: Int
+    abstract val fuelType: String
+    abstract var initialSpeed: Int
+    abstract fun start()
+    abstract fun stop()
+}
+
+class Scooter() : Vehicle() {
+    override val maxSpeed: Int = 180
+    override val fuelType: String = "Petrol"
+    override var initialSpeed: Int = 0
+
+    init {
+        start()
+    }
+
+    override fun start() {
+        println("Scooter engine started!")
+        initialSpeed()
+    }
+
+    fun setSpeed(speed: Int) {
+        this.initialSpeed = speed
+        initialSpeed()
+    }
+
+    fun initialSpeed() {
+        println("Current Speed: $initialSpeed")
+    }
+
+    override fun stop() {
+        println("Scooter engine stopped!")
+        setSpeed(0)
+    }
+
+
+}
+
 // main entry point of execution
 fun main() {
 //    // Creating objects
@@ -212,5 +257,7 @@ fun main() {
 //    val googlePay = GooglePay()
 //    checkout(500.0, googlePay)
 
-
+    val dio = Scooter()
+    dio.setSpeed(40)
+    dio.stop()
 }
