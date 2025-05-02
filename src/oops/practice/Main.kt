@@ -19,22 +19,24 @@ package oops.practice
 */
 
 // Class definition -> With header-defined primary constructor
-class Person(val name: String, var age: Int) {
+class Product(
+    val id: Int,
+    val name: String,
+    var price: Double,
+    var inStock: Boolean = true
+    ) {
 
     // The `init` block is the proper way to execute initialization
     // code for the primary constructor in Kotlin.
     // It runs right after the primary constructor parameters are assigned.
     init {
-        println("Name: ${this.name}\nAge: ${this.age}")
+        println("Product ID: ${this.id}\nProduct Name: ${this.name}\nProduct Price: $price")
     }
 
     // Method
-    fun canVote() {
-        if (this.age >= 18) {
-            println("${this.name} can vote.")
-        } else {
-            println("${this.name} cannot vote!")
-        }
+    fun applyDiscount(discount: Double) {
+        price -= price * (discount / 100)
+        println("After $discount% discount price: $price")
     }
 }
 
@@ -44,7 +46,7 @@ class Person(val name: String, var age: Int) {
 * requiring all interaction to be performed through an object's methods.
 */
 
-class BankAccount public constructor() {
+class BankAccount (private val bankAccountNo: Int) {
 
     private var balance: Double = 0.0
 
@@ -98,24 +100,27 @@ class BankAccount public constructor() {
 */
 
 // Base/Parent class
-open class Animal(private val name: String) {
-    open fun makeSound() {
-        println("Some generic animal sound")
+open class Notification(val message: String) {
+    open fun sendMessage() {
+        println("Sending notification: $message")
     }
 
-    fun animalColor() {} // methods which are not open cannot be overridden
+    fun receiveMessage() {} // methods which are not open cannot be overridden
 }
 
 // Derived/Child class
-class Dog(name: String, private val breed: String) : Animal(name) {
+class EmailNotification(
+    message: String,
+    val recipient: String
+) : Notification(message) {
 
-    override fun makeSound() {
-//        super.makeSound()
-        println("Woof! Woof!")
+    override fun sendMessage() {
+//        super.sendMessage()
+        println("Sending email to $recipient: $message")
     }
 
     fun greet() {
-        println("Hello! I am ${this.breed}.")
+        println("Hello! I am ${this.recipient}.")
     }
 }
 
@@ -156,24 +161,56 @@ fun printArea(shape: Shape) {
     println("Area: ${shape.calculateArea()}")
 }
 
+abstract class PaymentMethod {
+    abstract fun processPayment(amount: Double) : Boolean
+}
+
+class CreditCard : PaymentMethod() {
+    override fun processPayment(amount: Double): Boolean {
+        println("Processing $amount via Credit Card")
+        return true
+    }
+}
+
+class GooglePay : PaymentMethod() {
+    override fun processPayment(amount: Double): Boolean {
+        println("Processing $amount via GooglePay")
+        return true
+    }
+}
+
+fun checkout(amount: Double, paymentMethod: PaymentMethod) {
+    if (paymentMethod.processPayment(amount)) {
+        println("Payment successful")
+    } else {
+        println("Payment unsuccessful")
+    }
+}
+
 // main entry point of execution
 fun main() {
 //    // Creating objects
-//    val p1 = Person(name = "Brijesh", age = 25)
-//    p1.canVote() // calling the object's method
+//    val laptop = Product(1, "HP", 50000.0, true)
+//    laptop.applyDiscount(20.0) // calling the object's method
 
 //    val obj = BankAccount()
 //    obj.showBalance()
 //    obj.creditBalance(15000.0)
 //    obj.debitBalance(10000.0)
 
-//    val dogObj = Dog("Doggy", "Indian")
-//    dogObj.makeSound()
-//    dogObj.greet()
+//    val emailNotification = EmailNotification("Hello Android!", "Brijesh")
+//    emailNotification.sendMessage()
+//    emailNotification.greet()
 
 //    val cirObj = Circle(3.0)
 //    val rectObj = Rectangle(2.0, 3.0)
 //
 //    printArea(cirObj)
 //    printArea(rectObj)
+
+//    val creditCard = CreditCard()
+//    val googlePay = GooglePay()
+//    checkout(500.0, googlePay)
+
+
 }
