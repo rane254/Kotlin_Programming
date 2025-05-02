@@ -282,7 +282,7 @@ class MediaPlayer() : Recorder(), MediaController,  VolumeController {
 }
 
 /*
-* 8. Singleton with Object Declaration
+* 7. Singleton with Object Declaration
 * A singleton ensures that a class has only one instance and
 * provides a global point of access to it.
 */
@@ -294,6 +294,19 @@ object Logger {
         println("[$timestamp]: $message")
     }
 }
+
+/*
+* 8. Data Classes
+* A unique Kotlin feature that simplifies creating classes that mainly hold data.
+*/
+
+// User data for an app
+data class User(
+    private val id: Int,
+    private val name: String,
+    private val department: String,
+    private val salary: Double
+    )
 
 // main entry point of execution
 fun main() {
@@ -340,5 +353,13 @@ fun main() {
 
 //    Singleton
 //    Same instance everywhere
-    Logger.log("Hello! World")
+//    Logger.log("Hello! World")
+
+//     Data Class
+//    val user1 = User(1, "Brijesh", "Android Development", 400000.0)
+//    val user2 = user1.copy(id = 1)
+//    val user3 = user2.copy(id = 2)
+//
+//    println(user1.equals(user2)) // true
+//    (user2.equals(user3)).also(::println) // false // using an inline function
 }
