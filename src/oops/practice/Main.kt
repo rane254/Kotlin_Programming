@@ -1,5 +1,8 @@
 package oops.practice
 
+import java.time.LocalTime
+import kotlin.time.Duration
+
 /*
 * Much like regular properties,
 * properties declared in the primary constructor
@@ -278,6 +281,20 @@ class MediaPlayer() : Recorder(), MediaController,  VolumeController {
     }
 }
 
+/*
+* 8. Singleton with Object Declaration
+* A singleton ensures that a class has only one instance and
+* provides a global point of access to it.
+*/
+
+// Singleton logger
+object Logger {
+    fun log(message: String) {
+        val timestamp: LocalTime = java.time.LocalTime.now()
+        println("[$timestamp]: $message")
+    }
+}
+
 // main entry point of execution
 fun main() {
 //    Classes & Objects
@@ -320,4 +337,8 @@ fun main() {
 //    myMediaPlayer.decrease()
 //    myMediaPlayer.stopRecorder()
 //    myMediaPlayer.stop()
+
+//    Singleton
+//    Same instance everywhere
+    Logger.log("Hello! World")
 }
