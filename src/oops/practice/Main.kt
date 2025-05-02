@@ -1,6 +1,7 @@
 package oops.practice
 
 import java.time.LocalTime
+import javax.xml.crypto.Data
 import kotlin.time.Duration
 
 /*
@@ -308,6 +309,29 @@ data class User(
     private val salary: Double
     )
 
+/*
+* 9. Companion Object
+* Used for factory methods and static members:
+*/
+
+class Database private constructor() {
+
+    fun query(sql: String) = println("Executing: $sql")
+
+    companion object {
+        // Factory method
+        fun connect(url: String): Database {
+            println("Connecting to $url")
+            return Database()
+        }
+
+        // Static utility method
+        fun validateQuery(query: String): Boolean {
+            return !query.contains("DROP TABLE")
+        }
+    }
+}
+
 // main entry point of execution
 fun main() {
 //    Classes & Objects
@@ -362,4 +386,9 @@ fun main() {
 //
 //    println(user1.equals(user2)) // true
 //    (user2.equals(user3)).also(::println) // false // using an inline function
+
+//    Companion Object
+//    val db: Database = Database.connect("jdbc:mysql://localhost/app")
+//    Database.validateQuery("SELECT * FROM Table").also(::println)
+//    db.query("SELECT * FROM Table")
 }
