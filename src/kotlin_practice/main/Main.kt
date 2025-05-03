@@ -3,7 +3,7 @@ package kotlin_practice.main
 fun main() {
     while (true) {
        println("-------------------------------------")
-       println("[1. Exit, 2. Collections]")
+       println("[1. Exit, 2. Collections, 3. Fibonacci]")
        print("Enter your input: ")
 
        when (readln().toIntOrNull() ?: 0) {
@@ -17,6 +17,10 @@ fun main() {
            }
            2 -> {
                kotlinCollection()
+               continue
+           }
+           3 -> {
+               fibonacciSeries()
                continue
            }
            else -> {
@@ -51,4 +55,21 @@ fun kotlinCollection() {
     }
 
     list.also(::println)
+}
+
+fun fibonacciSeries() {
+    var first: Int = 0
+    var second: Int = 1
+    var next: Int
+    print("Enter the number: ")
+    val num: Int = readln().toInt()
+
+    print("Fibonacci Series: 0 1 ") // size: 5 = [ 0 1 1 2 3 5 8 13 ]
+    for (i: Int in 0 .. num) {
+        next = first + second
+        print("$next ")
+        first = second
+        second = next
+    }
+    println()
 }
