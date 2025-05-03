@@ -1,9 +1,11 @@
 package kotlin_practice.main
 
+import java.util.ArrayList
+
 fun main() {
     while (true) {
        println("-------------------------------------")
-       println("[1. Exit, 2. Collections, 3. Fibonacci]")
+       println("1. Exit\n2. Collections\n3. Fibonacci Series\n4. Reverse Program\n")
        print("Enter your input: ")
 
        when (readln().toIntOrNull() ?: 0) {
@@ -21,6 +23,10 @@ fun main() {
            }
            3 -> {
                fibonacciSeries()
+               continue
+           }
+           4 -> {
+               ReverseProgram.reverse()
                continue
            }
            else -> {
@@ -72,4 +78,43 @@ fun fibonacciSeries() {
         second = next
     }
     println()
+}
+
+class ReverseProgram() {
+
+    // static member
+    companion object {
+        fun reverse() {
+            print("Enter the size of an array: ")
+            val size: Int = readln().toInt()
+
+            val arr: Array<Int> = Array(size) { 0 }
+
+            for (i: Int in 0 until size) {
+                print("Enter element ${i+1}: ")
+                arr[i] = readln().toInt()
+            }
+
+            var left: Int = 0
+            var right: Int = arr.size - 1
+
+            while (left < right) {
+                change(arr, left, right)
+                left++
+                right--
+            }
+
+            print("Reversed Array: [ ")
+            arr.forEach {
+                ele -> print("$ele ")
+            }
+            println("]")
+        }
+
+        private fun change(arr: Array<Int>, idx1: Int, idx2: Int) {
+            val temp: Int = arr[idx1]
+            arr[idx1] = arr[idx2]
+            arr[idx2] = temp
+        }
+    }
 }
